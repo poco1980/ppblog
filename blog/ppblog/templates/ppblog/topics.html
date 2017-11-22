@@ -4,7 +4,7 @@
 <ul>
     {% for topic in topics %}
     <li>
-        <a href="{% url 'ppblog:topic' topic.id">{{ topic }}</a>
+        <a href="{% url 'ppblog:topic' topic.id %}">{{ topic }}</a>
     </li>
     {% empty %}
     <li>No topics have been entered yet</li>

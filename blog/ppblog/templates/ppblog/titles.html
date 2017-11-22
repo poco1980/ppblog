@@ -4,7 +4,7 @@
 <ul>
     {% for title in titles %}
     <li>
-        <a href="{% url 'ppblog:title' title.id %}">{{ topic }}</a>
+        <a href="{% url 'ppblog:title' title.id %}">{{ title }}</a>
     </li>
     {% empty %}
     <li>No titles have been added yet.</li>
