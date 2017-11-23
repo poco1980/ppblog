@@ -13,7 +13,7 @@ def topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     titles = topic.title_set.order_by('-date_added')
     context = {'topic': topic, 'titles': titles}
-    return render(request,'ppblog/topic.html')
+    return render(request, 'ppblog/topic.html')
 
 def titles(request):
     titles = Title.objects.order_by('date_added')
