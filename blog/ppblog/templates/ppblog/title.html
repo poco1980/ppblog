@@ -2,6 +2,9 @@
 {% block content %}
 <p>Title: {{ title  }}</p>
 <p>Articles:</p>
+<p>
+    <a href="{% url 'ppblog:new_entry' title.id %}">Add Article</a>
+</p>
 <ul>
     {% for entry in entries %}
     <li>

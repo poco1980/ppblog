@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from .models import Topic, Title
-from .forms import TopicForm, TitleForm
+from .forms import TopicForm, TitleForm, EntryForm
 
 def index(request):
     return render(request, 'ppblog/index.html')
@@ -50,3 +50,17 @@ def new_title(request):
             return HttpResponseRedirect(reverse('ppblog:titles'))
     context = {'form': form}
     return render(request, 'ppblog/new_title.html', context)
+
+def new_entry(request, title_id):
+    title = Title.objects.get(id=title_id)
+    if request.method != 'POST':
+        form = EntryForm()
+    else:
+        form = EntryForm(data=request.POST)
+        if form.is_valid():
+            new_entry = form.save(commit=False)
+            new_entry.title = title
+            new_entry.save()
+            return HttpResponseRedirect(reverse('ppblog:title', args=[topic_id]))
+    context = {'title': title, 'form': form}
+    return render(request, 'ppblog/new_entry.html', context)
