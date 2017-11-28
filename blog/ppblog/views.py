@@ -49,4 +49,4 @@ def new_title(request):
             form.save()
             return HttpResponseRedirect(reverse('ppblog:titles'))
     context = {'form': form}
-    return render(request, 'ppblog/new_title.html, context')
+    return render(request, 'ppblog/new_title.html', context)
