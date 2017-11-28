@@ -1,0 +1,10 @@
+{% extends "ppblog/base.html" %}
+
+{% block content %}
+<p>Add a new title:</p>
+<form action="{% url 'ppblog:new_title' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">add title</button>
+</form>
+{% endblock content %}<p>Add a new title:</p>

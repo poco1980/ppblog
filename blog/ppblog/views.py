@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from .models import Topic, Title
+from .forms import TopicForm, TitleForm
 
 def index(request):
     return render(request, 'ppblog/index.html')
@@ -25,3 +28,25 @@ def title(request, title_id):
     entries = title.entry_set.order_by('-date_added')
     context = {'title': title, 'entries': entries}
     return  render(request, 'ppblog/title.html', context)
+
+def new_topic(request):
+    if request.method != 'POST':
+        form = TopicForm()
+    else:
+        form = TopicForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('ppblog:topics'))
+    context = {'form': form}
+    return render(request, 'ppblog/new_topic.html', context)
+
+def new_title(request):
+    if request.method != 'POST':
+        form = TitleForm()
+    else:
+        form = TitleForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('ppblog:titles'))
+    context = {'form': form}
+    return render(request, 'ppblog/new_title.html, context')

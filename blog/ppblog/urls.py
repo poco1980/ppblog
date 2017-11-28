@@ -16,4 +16,7 @@ urlpatterns = [
 
     # Single Title
     url(r'^titles/(?P<title_id>\d+)/$', views.title, name='title'),
+
+    # New Topic
+    url(r'^new_topic/$', views.new_topic, name='new_topic')
 ]
